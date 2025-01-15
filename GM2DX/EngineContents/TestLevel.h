@@ -17,5 +17,5 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	std::shared_ptr<class MyCustomRenderer> Renderer = nullptr;
+	std::shared_ptr<class Player> Actor = nullptr;
 };

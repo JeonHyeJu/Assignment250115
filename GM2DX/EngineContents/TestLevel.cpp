@@ -1,20 +1,12 @@
 #include "PreCompile.h"
 #include "TestLevel.h"
-#include "MyCustomRenderer.h"
+#include "Player.h"
 #include <EngineCore/CameraActor.h>
-#include <EngineCore/DefaultSceneComponent.h>
 #include <EnginePlatform/EngineInput.h>
 
 ATestLevel::ATestLevel()
 {
-	std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
-	RootComponent = Default;
-
-	const float SIZE = 100.f;
-	Renderer = CreateDefaultSubObject<MyCustomRenderer>();
-	Renderer->SetScale3D({ SIZE, SIZE, SIZE });
-	Renderer->SetOrder(0);
-	Renderer->SetupAttachment(RootComponent);
+	Actor = GetWorld()->SpawnActor<Player>();
 
 	std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation({ 0.f, 0.f, -1000.f });
@@ -39,5 +31,5 @@ void ATestLevel::Tick(float _DeltaTime)
 		Camera->FreeCameraSwitch();
 	}
 
-	Renderer->AddWorldRotation({ 0.f, 0.f, 30.f * _DeltaTime });
+	Actor->AddActorRotation({ 0.f, 0.f, 30.f * _DeltaTime });
 }

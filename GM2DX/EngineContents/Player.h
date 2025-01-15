@@ -1,22 +1,22 @@
 #pragma once
+#include <EngineCore/Actor.h>
 
-// Ό³Έν :
-class Player
+class Player : public AActor
 {
 public:
-	// constrcuter destructer
 	Player();
 	~Player();
 
-	// delete Function
 	Player(const Player& _Other) = delete;
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay();
+	void Tick(float _deltaTime);
 
 private:
-
+	std::shared_ptr<class MyCustomRenderer> Renderer = nullptr;
 };
 
